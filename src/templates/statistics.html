@@ -1,0 +1,35 @@
+<div class="stats ng-cloak" ng-init="statisticsCtrl.init()">
+  <div class="container" ng-if="!statisticsCtrl.authFlag">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1">
+        <div class="wrapper-no-stats" ng-if="statisticsCtrl.noStats">
+          <div class="no-stats">Статистика не найдена</div>
+        </div>
+        <div class="table-responsive"  ng-if="statisticsCtrl.userStats">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="text-center">User login</th>
+                <th class="text-center">User action</th> 
+                <th class="text-center">Time of action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="(index, value) in statisticsCtrl.userStats">
+                <td class="col-xs-3 col-sm-3 col-md-2 text-center">{{value.user_login}}</td>
+                <td class="col-xs-6 col-sm-5 col-md-7 text-center" ng-if="value.section !== null">
+                  Viewed this page <a ng-href="{{value.section}}">{{value.section}}</a>
+                </td>
+                <td class="col-xs-6 col-sm-5 col-md-7 text-center" ng-if="(value.status === 'connect')">User logged in</td>
+                <td class="col-xs-3 col-sm-4 col-md-3 text-center">{{value.date * 1000 | date:"MM/dd/yyyy 'at' h:mma"}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="height-100" ng-if="statisticsCtrl.authFlag" auth></div>
+</div>
+
+<ui-view height-100></ui-view>

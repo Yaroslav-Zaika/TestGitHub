@@ -1,0 +1,47 @@
+<div class="height-100 ng-cloak" ng-init="repositoriesCtrl.init()">
+  <div ng-if="!repositoriesCtrl.authFlag" header></div>
+  <div class="container" ng-if="!repositoriesCtrl.authFlag">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3 col-md-push-1 user">
+        <div>
+          <img class="avatar" ng-src="{{repositoriesCtrl.user.avatar_url}}" alt="">
+          <div class="username">{{repositoriesCtrl.user.login}}</div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-7 col-md-push-1">
+        <div class="row">
+          <div class="user-profile-nav col-xs-12 col-sm-12 col-md-12">
+            <a class="nav active" href="#">Repositories</a>
+          </div>
+        </div>
+        <div class="row">
+          <ol class="col-xs-12 col-sm-12 col-md-12 list-repositories">
+            <div class="row">
+              <li class="col-xs-12 col-sm-12 col-md-12"
+                  ng-repeat="repository in repositoriesCtrl.repositories">
+                  <div class="box-repos col-xs-12 col-sm-12 col-md-12">
+                    <div class="box-repo-1">
+                      <a ui-sref="issues({  login: repository.owner.login, name: repository.name })">{{repository.name}}</a>
+                    </div>
+                    <div class="box-repo-2">
+                      <p class="repo-desc" ng-if="repository.description">{{repository.description}}</p>
+                    </div>
+                     <div class="box-repo-3">
+                       <p class="repo-circle"
+                          ng-if="repository.language"
+                          ng-style="{'background-color': repositoriesCtrl.getColor(repository.language)}"></p>
+                        <p class="repo-lang" ng-if="repository.language">{{repository.language}}</p>
+                        <p class="repo-updated"  ng-if="repository.updated">{{repository.updated}}</p>
+                     </div>
+                  </div>
+              </li>
+            </div>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="height-100" ng-if="repositoriesCtrl.authFlag" auth></div>
+</div>
+
+<ui-view height-100></ui-view>

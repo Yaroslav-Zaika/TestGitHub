@@ -1,0 +1,57 @@
+<div class="height-100 ng-cloak" ng-init="issuesCtrl.init()">
+  <div ng-if="!issuesCtrl.authFlag" header></div>
+  <div class="container" ng-if="!issuesCtrl.authFlag">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-push-1">
+        <div class="row menu-repo-nav">
+          <div class="col-xs-12 col-sm-12 col-md-12 details">
+            <a ui-sref="repositories">{{issuesCtrl.userLogin}}</a>
+            <span class="path-divider">/</span>
+            <a class="repo-active" ui-sref="issues({login: issuesCtrl.userLogin, name: issuesCtrl.repoName })">{{issuesCtrl.repoName}}</a>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 reponav">
+            <a class="reponav-item active" href="#">Issues</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 no-questions"
+            ng-if="!issuesCtrl.issues && issuesCtrl.noQuestions">
+            <svg aria-hidden="true" class="octicon octicon-issue-opened blankslate-icon" height="40" version="1.1" viewBox="0 0 14 16" width="35">
+              <path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path>
+            </svg>
+            <h3>Welcome to Issues!</h3>
+            <p>Issues are used to track todos, bugs, feature requests, and more. As issues are created, they’ll appear here in a searchable and filterable list. To get started, you should <a href="#">create an issue</a>.</p>
+          </div>
+          <ul class="col-xs-12 col-sm-12 col-md-12 list-issues"
+             ng-if="issuesCtrl.issues">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 table-list-header"></div>
+              <li class="col-xs-12 col-sm-12 col-md-12 box-issues"
+                  ng-repeat="issue in issuesCtrl.issues">
+                <div class=" col-xs-12 col-sm-12 col-md-12">
+                  <div class="box-svg">
+                    <span tooltip-placement="top"
+                       uib-tooltip="Open issue">
+                      <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+                        <path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path>
+                      </svg>
+                    </span>
+                  </div>
+                  <div>
+                    <div class="issues-title">
+                      <a ng-href="#">{{issue.title}}</a>
+                    </div>
+                    <p class="author">#{{issue.number}} {{issue.opened}} by <a href="#">{{issue.user.login}}</a></p>
+                  </div>
+                </div>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="height-100" ng-if="issuesCtrl.authFlag" auth></div>
+</div>
+
+<ui-view height-100></ui-view>
